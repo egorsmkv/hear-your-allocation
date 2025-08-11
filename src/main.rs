@@ -46,8 +46,6 @@ fn simple_pattern() {
 }
 
 fn harder_pattern() {
-    println!("The pattern of allocations can be edited below to create different sounds.");
-
     // Define the rhythmic pattern. Each tuple represents an allocation "event".
     // The first element is the size of the allocation in kilobytes (KB).
     // The second element is the delay in milliseconds (ms) before the next event.
@@ -109,8 +107,6 @@ fn harder_pattern() {
 }
 
 fn ukrainian_anthem() {
-    println!("The pattern is designed to mimic the Ukrainian national anthem's rhythm.");
-
     // Define the rhythmic pattern based on the opening phrase of the anthem.
     // Each tuple represents an allocation "event".
     // The first element is the size of the allocation in kilobytes (KB).
@@ -168,13 +164,30 @@ fn ukrainian_anthem() {
 }
 
 fn main() {
+    println!("Trivial pattern:");
+
+    let delay = Duration::from_millis(1000);
+    for i in 1..50 {
+        thread::sleep(delay / i);
+        let _ = Box::new(i);
+        println!("Allocated...");
+    }
+
+    thread::sleep(Duration::from_millis(1000));
+
+    println!("\nSimple pattern:");
+
     simple_pattern();
 
     thread::sleep(Duration::from_millis(1000));
 
+    println!("\nThe pattern of allocations can be edited below to create different sounds.");
+
     harder_pattern();
 
     thread::sleep(Duration::from_millis(1000));
+
+    println!("\nThe pattern is designed to mimic the Ukrainian national anthem's rhythm.");
 
     ukrainian_anthem();
 }
